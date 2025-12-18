@@ -1,0 +1,15 @@
+{
+	"components": [
+		{
+			"id": "modpUSChecklistPlugin",
+			"type": "VIEW_PLUGIN",
+			"allowMultipleInstances": false,
+			"name": "abb.views.customChecklist.modpUSChecklistPlugin.modpUSChecklistPlugin",
+			"propertyEditor": "abb.views.customChecklist.modpUSChecklistPlugin.modpUSChecklistPlugin.builder.PropertyEditor",
+			"i18n": "abb.views.customChecklist.modpUSChecklistPlugin.modpUSChecklistPlugin.i18n.i18n",
+            "productionProcessEnabled": true,
+           "productionProcessTitle": "modpUSChecklistPlugin",
+			"supportedPodTypes": ["WORK_CENTER","OPERATION","ORDER","OTHER","MONITOR"]
+		}   
+	]
+}

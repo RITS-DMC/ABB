@@ -1,0 +1,15 @@
+{
+	"components": [
+		{
+			"id": "calibrationDCPlugin",
+			"type": "VIEW_PLUGIN",
+			"allowMultipleInstances": false,
+			"name": "abb.views.calibrationDC.calibrationDCPlugin.calibrationDCPlugin",
+			"propertyEditor": "abb.views.calibrationDC.calibrationDCPlugin.calibrationDCPlugin.builder.PropertyEditor",
+			"i18n": "abb.views.calibrationDC.calibrationDCPlugin.calibrationDCPlugin.i18n.i18n",
+            "productionProcessEnabled": true,
+           "productionProcessTitle": "calibrationDCPlugin",
+			"supportedPodTypes": ["WORK_CENTER","OPERATION","ORDER"]
+		}   
+	]
+}

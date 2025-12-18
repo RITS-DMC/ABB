@@ -1,0 +1,160 @@
+<mvc:View 
+	xmlns:l="sap.ui.layout" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns="sap.m" 
+	xmlns:ui="sap.ui.unified" 
+	xmlns:core="sap.ui.core" 
+	controllerName="abb.views.customChecklist.modpUSChecklistPlugin.modpUSChecklistPlugin.controller.MainView" 
+	width="100%" 
+	height="100%">
+	<Panel id="podModelPluginPanel" width="100%" height="100%" expandable="false" expanded="true" accessibleRole="Region" backgroundDesign="Transparent">
+		<!-- <headerToolbar>
+			<Toolbar height="3rem">
+				<Title text="Andon Alert "/>
+				<ToolbarSpacer/>
+			</Toolbar>
+		</headerToolbar> -->
+        
+		<content>
+			<Panel id="default" class="sapUiDemoFlexBoxSizeAdjustments" visible="true">
+
+    <Table 
+       items="{
+       path: 'localModel>/results',
+       sorter: {
+            path: 'DcGroup',
+            descending: false
+        }
+       }"
+       width="100%" id="dataCollectionTable"
+       sticky="ColumnHeaders">
+        <headerToolbar>
+            <Toolbar id="tlb1">
+            <ToolbarSpacer />      
+                <Button xmlns="sap.m" id="btn0" press="onRefresh" text="{i18n>Refresh}"/>
+            </Toolbar>
+        </headerToolbar>
+     <columns>
+        <Column width="30%" hAlign="Begin">
+            <Text text="{i18n>checklistDesc}" />
+        </Column>
+        
+        <Column  demandPopin="true" minScreenWidth="Tablet">
+            <Text text="{i18n>Result}" />
+        </Column>
+        
+        <Column visible="{viewModel>/showUser}" demandPopin="true" minScreenWidth="Tablet">
+            <Text text="{i18n>userID}" />
+        </Column>
+        
+        <Column visible="{viewModel>/showTimestamp}" demandPopin="true" minScreenWidth="Tablet">
+            <Text text="{i18n>timestamp}" />
+        </Column>
+        
+        <Column visible="false"  demandPopin="true" minScreenWidth="Tablet">
+            <Text text="{i18n>ccStatus}" />
+        </Column>
+        
+        <Column  visible="false"  demandPopin="true" minScreenWidth="Tablet">
+            <Text text="{i18n>ccCheckedBy}" />
+        </Column>
+        
+        <Column  visible="false" demandPopin="true" minScreenWidth="Tablet">
+            <Text text="{i18n>ccTimestamp}" />
+        </Column>
+          <Column  visible="true" demandPopin="true" minScreenWidth="Tablet">
+            <Text text="{i18n>Satus}" />
+        </Column>
+        
+        <Column width="5%" visible="false"/>
+    </columns>
+    <items>
+        <ColumnListItem>
+            <cells>
+                <Text text="{localModel>Description}"/>
+               <HBox visible="{= ${localModel>Rule}.toUpperCase()!== 'INFORMATIONAL' }" class="wrapHBox">
+                <core:Icon
+                        id="statusIcon"
+                        visible="false"
+                        src="{= ${localModel>DcParameterValue} === 'PASS' ? 'sap-icon://status-completed' :
+                                ${localModel>DcParameterValue} === 'FAIL' ? 'sap-icon://decline' :
+                                ${localModel>DcParameterValue} === 'NOT COLLECTED' ? 'sap-icon://appear-offline' : ''}"
+                        color="{= ${localModel>DcParameterValue} === 'PASS' ? '#28a745' : 
+                                    ${localModel>DcParameterValue} === 'FAIL' ? '#df6e0c' : 
+                                    ${localModel>DcParameterValue} === 'NOT COLLECTED' ? '#b00' : ''}"
+                        size="1.5rem"
+                        tooltip="{localModel>DcParameterValue}"
+                    />
+                <HBox id="statusBox" visible="true">
+                    <Button
+                        icon="sap-icon://status-completed"
+                        type="{= ${localModel>DcParameterValue} === 'M-PASS-COLLECTED'  ||  ${localModel>DcParameterValue} === 'O-PASS-COLLECTED' ? 'Success' : 'Transparent' }"
+                        press="onStatusIconPress"
+                        tooltip="PASS"
+                        class="{= ${localModel>DcParameterValue} === 'M-PASS-COLLECTED' || ${localModel>DcParameterValue} === 'O-PASS-COLLECTED' ? 'highlight-icon-green' : 'dim-icon' }"
+                    />
+                    <Button
+                        icon="sap-icon://decline"
+                        type="{= ${localModel>DcParameterValue} === 'M-FAIL-COLLECTED'|| ${localModel>DcParameterValue} === 'O-FAIL-COLLECTED' ? 'Attention' : 'Transparent' }"
+                        press="onStatusIconPress"
+                        tooltip="FAIL"
+                        class="{= ${localModel>DcParameterValue} === 'M-FAIL-COLLECTED'||${localModel>DcParameterValue} === 'O-FAIL-COLLECTED' ? 'highlight-icon-yellow' : 'dim-icon' }"
+                    />
+                   
+                </HBox>
+                </HBox>
+                <Text text="{localModel>UserId}"/>
+                <Text text="{localModel>LastUpdatedAt}"/>
+                <HBox>
+                    <core:Icon
+                        id="ccIcon2"
+                        visible="false"
+                        src="{= ${localModel>CrossCheckStatus} === 'VERIFIED' ? 'sap-icon://thumb-up' :
+                                ${localModel>CrossCheckStatus} === 'NOT APPLICABLE' ? 'sap-icon://cancel' :
+                                'sap-icon://decline' }"
+                        color="{= ${localModel>CrossCheckStatus} === 'VERIFIED' ? '#107e3e' :
+                                    ${localModel>CrossCheckStatus} === 'NOT APPLICABLE' ? '#bfbfbf' :
+                                    '#b00' }"
+                        size="1.5rem"
+                        tooltip="{localModel>CrossCheckStatus}"
+                    />
+                    <core:Icon
+                        id="ccIcon1"
+                        visible="true"
+                        src="{= ${localModel>CrossCheckStatus} === 'VERIFIED' ? 'sap-icon://thumb-up' :
+                                ${localModel>CrossCheckStatus} === 'NOT APPLICABLE' ? 'sap-icon://cancel' : '' }"
+                        color="{= ${localModel>CrossCheckStatus} === 'VERIFIED' ? '#107e3e' : 
+                                    ${localModel>CrossCheckStatus} === 'NOT APPLICABLE' ? '#bfbfbf' : '' }"
+                        size="1.5rem"
+                        tooltip="{localModel>CrossCheckStatus}"
+                    />
+                </HBox>
+                <Text text="{localModel>CrossCheckedBy}"/>
+                <Text text="{localModel>CrossCheckTime}"/>
+                <HBox visible="{= ${localModel>Rule}.toUpperCase()!== 'INFORMATIONAL' }" class="wrapHBox">
+                 <Button
+                        icon="sap-icon://appear-offline"
+                        type="{= ${localModel>DcParameterValue} === 'NOT COLLECTED' || ${localModel>DcParameterValue} === 'M-FAIL-COLLECTED'? 'Negative' : 'Success' }"
+                         tooltip="{= ${localModel>DcParameterValue} === 'NOT COLLECTED' || ${localModel>DcParameterValue} === 'M-FAIL-COLLECTED' ? 'FAIL' : 'PASS' }"
+            
+                        class="{= ${localModel>DcParameterValue} === 'NOT COLLECTED' || ${localModel>DcParameterValue} === 'M-FAIL-COLLECTED'? 'highlight-icon-red' : 'highlight-icon-green' }"
+                    />
+                    </HBox>
+                <HBox id="ccBox" visible="true">
+                    <Button
+                        icon="sap-icon://complete"
+                        type="{= ${localModel>CrossCheckDisabled} === false ? 'Attention' : 'Transparent' }"
+                        enabled="{= !${localModel>CrossCheckDisabled} }"
+                        visible="{showCrossCheckIcon}"
+                        press="onCrossCheck"
+                        tooltip="Crosscheck"
+                    />
+                </HBox>
+            </cells>
+        </ColumnListItem>
+    </items>
+</Table>
+			</Panel>
+		</content>
+	</Panel>
+</mvc:View>

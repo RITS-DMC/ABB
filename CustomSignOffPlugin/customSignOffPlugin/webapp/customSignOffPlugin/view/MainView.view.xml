@@ -1,0 +1,151 @@
+<mvc:View 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns="sap.m" 
+    xmlns:sap.m="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:f="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core" 
+    xmlns:ui="sap.ui.table" 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    controllerName="abb.views.custom.customSignOffPlugin.customSignOffPlugin.controller.MainView"
+    width="100%" 
+    height="100%">
+		
+    <Panel 
+    id="panelPlugin"  
+    width="100%" 
+    height="100%" 
+    expandable="false" 
+    expanded="false" 
+    accessibleRole="Region" 
+    backgroundDesign="Transparent" 
+    class="sapUiNoContentPadding">
+    <headerToolbar>
+        <Toolbar height="3rem">
+            <Button
+                id="backButton"
+                visible="false"
+                text="{i18n>template.back.btn}"
+                tooltip="{i18n>template.back.tooltip}"
+                icon="sap-icon://nav-back"
+                press="onBackPress"/>
+            <Title id="headerTitle" text=""/>
+            <ToolbarSpacer/>
+            <Button
+                id="closeButton"
+                visible="false"
+                tooltip="{i18n>template.close.tooltip}"
+                icon="sap-icon://decline"
+                press="onClosePress"/>
+        </Toolbar>
+    </headerToolbar>
+    <content>
+    <Text text="     "></Text>
+        <VBox id="parameterTableContainer1">
+          <!-- <Text text="   " />
+           <HBox justifyContent="Start" alignItems="Center">
+            <Text text="   " width="15px" />
+            <Text text="Parameters List (" class="boldText"  />
+            <Text text="{= ${paramsModel>/params}.length }" />  
+            <Text text=")  " class="boldText"/>
+            <Text text="   " width="10px" />
+            <Text text="Group:  " class="boldText" />
+            <Text text="{paramsModel>/group}" />
+            <Text text="   " width="15px" />
+            <Text text="Description:  " class="boldText"/>
+           <Text text="{paramsModel>/groupDescription}" />
+           </HBox>
+           
+
+            <Text text="   " /> -->
+            <ui:Table
+                id="parameterTable11"
+                selectionMode="None"
+                visibleRowCount="{= ${paramsModel>/params}.length }"
+                rows="{paramsModel>/params}">
+                <ui:columns>
+                    <ui:Column>
+                        <Label text="{i18n>label.parameterName.text}" design="Bold"  />
+                        <ui:template>
+                            <Title text="{paramsModel>parameterPrompt}"/>
+                        </ui:template>
+                    </ui:Column>
+                     <ui:Column>
+                    <Label text="{i18n>label.parameterValue.text}" required="true" design="Bold" />
+                    <ui:template>
+                        <HBox>
+                            <Input 
+                               showValueHelp="true"
+                               valueHelpOnly="true"
+                               placeholder="{paramsModel>placeHolder}"
+                               value="{paramsModel>parameterValue}"
+                               valueHelpRequest="onValueHelpRequest"
+                               liveChange="onInputChange" />
+                        </HBox>
+                    </ui:template>
+                </ui:Column>
+                </ui:columns>
+            </ui:Table>
+            <Text text="  "></Text>
+            <HBox justifyContent="Center" class="noBottomSpacing">
+                <Button text="{i18n>button.save.text}" icon="sap-icon://begin" press="onCollectPress" type="Emphasized" class="clickableButton"/>
+                <Text text=" " width="15px" />
+                <Button text="{i18n>button.clear.text}" icon="sap-icon://sys-cancel" press="onClearPress" type="Default" class="clickableButton"/>
+                <!-- <Button 
+          id="closeButton"
+          visible="false"
+          tooltip="{i18n>template.close.tooltip}"
+          icon="sap-icon://decline"
+          press="onClosePress"/> -->
+                <!-- <Button text="" press="onDialogClose"  type="Emphasized" class="clickableButton" /> -->
+            </HBox>
+            <Text text="      "  />
+        </VBox>
+    </content>
+</Panel>
+
+<!-- Value Help Dialog -->
+<Dialog
+    id="idValueHelpDialog"
+    title="{i18n>dialog.valueHelp.title}"
+    contentWidth="40%"
+    contentHeight="65%">
+
+    <VBox class="sapUiSmallMargin">
+        <SearchField
+            id="idSearchField"
+            liveChange=".onSearchValueHelp"
+            width="100%" />
+    </VBox>
+
+    <Table
+        id="idValueHelpTable"
+        mode="SingleSelectMaster"
+        includeItemInSelection="true"
+        selectionChange=".onValueHelpConfirm"
+        items="{valueHelpModel>/ReasonGroups}">
+
+        <columns>
+            <Column id="groupColumn">
+                <Text text="{i18n>label.availableGroups.text}" />
+            </Column>
+            <Column id="reasonColumn">
+                <Text text="{i18n>label.availableReasonCodes.text}" />
+            </Column>
+        </columns>
+
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{valueHelpModel>Group}" />
+                    <Text text="{valueHelpModel>ReasonCode}" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+
+    <endButton>
+        <Button text="{i18n>button.cancel.text}" press=".onCancelValueHelp" />
+    </endButton>
+</Dialog>
+</mvc:View>

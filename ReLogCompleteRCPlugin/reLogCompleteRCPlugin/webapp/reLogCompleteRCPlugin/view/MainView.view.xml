@@ -1,0 +1,433 @@
+<mvc:View 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns="sap.m" 
+    xmlns:sap.m="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:f="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core" 
+    xmlns:ui="sap.ui.table" 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    controllerName="abb.views.reLogCompleteRC.reLogCompleteRCPlugin.reLogCompleteRCPlugin.controller.MainView"
+    width="100%" 
+    height="100%">
+		
+    <Panel 
+    id="panelPlugin"  
+    width="100%" 
+    height="100%" 
+    expandable="false" 
+    expanded="false" 
+    accessibleRole="Region" 
+    backgroundDesign="Transparent" 
+    class="sapUiNoContentPadding">
+    <headerToolbar>
+        <Toolbar height="3rem">
+            <Button
+                id="backButton"
+                visible="false"
+                text="{i18n>template.back.btn}"
+                tooltip="{i18n>template.back.tooltip}"
+                icon="sap-icon://nav-back"
+                press="onBackPress"/>
+            <Title id="headerTitle" text=""/>
+            <ToolbarSpacer/>
+            <Button
+                id="closeButton"
+                visible="false"
+                tooltip="{i18n>template.close.tooltip}"
+                icon="sap-icon://decline"
+                press="onClosePress"/>
+        </Toolbar>
+    </headerToolbar>
+    <content>
+    <Text text="     "></Text>
+        <VBox id="parameterTableContainer1">
+
+          <!-- <Text text="   " />
+           <HBox justifyContent="Start" alignItems="Center">
+            <Text text="   " width="15px" />
+            <Text text="Parameters List (" class="boldText"  />
+            <Text text="{= ${paramsModel>/params}.length }" />  
+            <Text text=")  " class="boldText"/>
+            <Text text="   " width="10px" />
+            <Text text="Group:  " class="boldText" />
+            <Text text="{paramsModel>/group}" />
+            <Text text="   " width="15px" />
+            <Text text="Description:  " class="boldText"/>
+           <Text text="{paramsModel>/groupDescription}" />
+           </HBox>-->
+            <ui:Table
+                id="parameterTable11"
+                selectionMode="None"
+                visibleRowCount="{= ${paramsModel>/params}.length }"
+                rows="{paramsModel>/params}">
+
+                <ui:extension>
+					<OverflowToolbar height="auto">
+                        <VBox>
+                            <Label text="{i18n>label.order.text}" required="false" design="Bold" labelFor="orderInputId" />
+                            <Input 
+                                showValueHelp="true"
+                                valueHelpOnly="true"
+                                id="orderInputId"
+                                placeholder="{i18n>input.order.placeHolder}"
+                                value="{paramsModel>/order}"
+                                valueHelpRequest="onOrderValueHelpRequest"
+                            />
+                        </VBox>
+						<ToolbarSpacer/>
+                        <VBox>
+                            <Label text="{i18n>label.sfc.text}" required="true" design="Bold" labelFor="sfcInputId" />
+                            <Input 
+                                showValueHelp="true"
+                                valueHelpOnly="true"
+                                id="sfcInputId"
+                                placeholder="{i18n>input.sfc.placeHolder}"
+                                value="{paramsModel>/sfc}"
+                                valueHelpRequest="onSFCValueHelpRequest"
+                            />
+                        </VBox>
+                        <ToolbarSpacer/>
+					    <VBox>
+                            <Label text="{i18n>label.oper.text}" required="true" design="Bold" labelFor="operInputId" />
+                            <Input 
+                                showValueHelp="true"
+                                valueHelpOnly="true"
+                                id="operInputId"
+                                placeholder="{i18n>input.oper.placeHolder}"
+                                value="{paramsModel>/operation}"
+                                valueHelpRequest="onOperValueHelpRequest"
+                            />
+                        </VBox>
+                        <!-- <ToolbarSpacer/>
+					    <VBox>
+                            <Label text="{i18n>label.resc.text}" required="true" design="Bold" labelFor="rescInputId" />
+                            <Input 
+                                showValueHelp="true"
+                                valueHelpOnly="true"
+                                id="rescInputId"
+                                placeholder="{i18n>input.resc.placeHolder}"
+                                value="{paramsModel>/resource}"
+                                valueHelpRequest="onRescValueHelpRequest"
+                            />
+                        </VBox> -->
+					</OverflowToolbar>
+				</ui:extension>
+
+                <ui:columns>
+                    <ui:Column>
+                        <Label text="{i18n>label.parameterName.text}" design="Bold"  />
+                        <ui:template>
+                            <Title text="{paramsModel>parameterPrompt}"/>
+                        </ui:template>
+                    </ui:Column>
+                     <ui:Column>
+                    <Label text="{i18n>label.parameterValue.text}" required="true" design="Bold" />
+                    <ui:template>
+                        <HBox>
+                            <Input 
+                               showValueHelp="true"
+                               valueHelpOnly="true"
+                               placeholder="{paramsModel>placeHolder}"
+                               value="{paramsModel>parameterValue}"
+                               valueHelpRequest="onValueHelpRequest"
+                               liveChange="onInputChange" />
+                        </HBox>
+                    </ui:template>
+                </ui:Column>
+                </ui:columns>
+            </ui:Table>
+            <Text text="  "></Text>
+            <HBox justifyContent="Center" class="noBottomSpacing">
+                <Button text="{i18n>button.save.text}" icon="sap-icon://begin" press="onCollectPress" type="Emphasized" class="clickableButton"/>
+                <Text text=" " width="15px" />
+                <Button text="{i18n>button.clear.text}" icon="sap-icon://sys-cancel" press="onClearPress" type="Default" class="clickableButton"/>
+                <!-- <Button 
+          id="closeButton"
+          visible="false"
+          tooltip="{i18n>template.close.tooltip}"
+          icon="sap-icon://decline"
+          press="onClosePress"/> -->
+                <!-- <Button text="" press="onDialogClose"  type="Emphasized" class="clickableButton" /> -->
+            </HBox>
+            <Text text="      "  />
+        </VBox>
+        <VBox id="dcHistorianTableContainer1">
+            <Text text="   " />
+            <ui:Table
+                id="dcHistorianTableId"
+                selectionMode="None"
+                visibleRowCount="{= ${dcHistorianModel>/dataList} ? ( ${dcHistorianModel>/dataList}.length > 5 ? 5 : ${dcHistorianModel>/dataList}.length ) : 0 }"
+                rows="{dcHistorianModel>/dataList}">
+                <ui:columns>
+                    <ui:Column>
+                        <Label text="{i18n>label.oper.text}" design="Bold"/>
+                        <ui:template>
+                            <Text text="{dcHistorianModel>OperationActivity}" wrapping="true"/>
+                        </ui:template>
+                    </ui:Column>
+                    <ui:Column>
+                        <Label text="{i18n>label.reasonGroup.text}" design="Bold"/>
+                        <ui:template>
+                            <Text text="{dcHistorianModel>REASON_GROUP}" wrapping="true"/>
+                        </ui:template>
+                    </ui:Column>
+                    <ui:Column>
+                        <Label text="{i18n>label.reasonCode.text}" design="Bold"/>
+                        <ui:template>
+                            <Text text="{dcHistorianModel>REASON_CODE}" wrapping="true"/>
+                        </ui:template>
+                    </ui:Column>
+                    <ui:Column>
+                        <Label text="{i18n>label.userId.text}" design="Bold"/>
+                        <ui:template>
+                            <Text text="{dcHistorianModel>UserId}" wrapping="true"/>
+                        </ui:template>
+                    </ui:Column>
+                    <ui:Column width="170px">
+                        <Label text="{i18n>label.lastUpdatedAt.text}" design="Bold" />
+                        <ui:template>
+                            <Text text="{dcHistorianModel>LastUpdatedAt}" wrapping="true"/>
+                        </ui:template>
+                    </ui:Column>
+                </ui:columns>
+            </ui:Table>
+            <Text text="      "  />
+        </VBox>
+    </content>
+</Panel>
+
+<!-- Data Collection Value Help Dialog -->
+<Dialog
+    id="idValueHelpDialog"
+    title="{i18n>dialog.valueHelp.title}"
+    contentWidth="40%"
+    contentHeight="65%">
+
+    <VBox class="sapUiSmallMargin">
+        <SearchField
+            id="idSearchField"
+            liveChange=".onSearchValueHelp"
+            width="100%" />
+    </VBox>
+
+    <Table
+        id="idValueHelpTable"
+        mode="SingleSelectMaster"
+        includeItemInSelection="true"
+        selectionChange=".onValueHelpConfirm"
+        items="{valueHelpModel>/ReasonGroups}">
+
+        <columns>
+            <Column id="groupColumn">
+                <Text text="{i18n>label.availableGroups.text}" />
+            </Column>
+            <Column id="reasonColumn">
+                <Text text="{i18n>label.availableReasonCodes.text}" />
+            </Column>
+        </columns>
+
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{valueHelpModel>Group}" />
+                    <Text text="{valueHelpModel>ReasonCode}" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+
+    <endButton>
+        <Button text="{i18n>button.cancel.text}" press=".onCancelValueHelp" />
+    </endButton>
+</Dialog>
+
+<!-- Selection Order Value Help Dialog -->
+<Dialog
+    id="idOrderValueHelpDialog"
+    title="{i18n>dialog.orderValueHelp.title}"
+    contentWidth="40%"
+    contentHeight="65%">
+
+    <VBox class="sapUiSmallMargin">
+        <SearchField
+            id="idOrderSearchField"
+            liveChange=".onOrderSearchValueHelp"
+            width="100%" />
+    </VBox>
+
+    <Table
+        id="idOrderValueHelpTable"
+        mode="SingleSelectMaster"
+        includeItemInSelection="true"
+        selectionChange=".onOrderValueHelpConfirm"
+        items="{orderValueHelpModel>/orderList}">
+
+        <columns>
+            <Column id="orderColumnId">
+                <Text text="{i18n>label.order.text}" />
+            </Column>
+            <Column id="orderSfcColumnId">
+                <Text text="{i18n>label.sfc.text}" />
+            </Column>
+        </columns>
+
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{orderValueHelpModel>order}" />
+                    <Text text="{orderValueHelpModel>orderSfc}" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+
+    <endButton>
+        <Button text="{i18n>button.cancel.text}" press=".onCancelOrderValueHelp" />
+    </endButton>
+</Dialog>
+
+<!-- Selection SFC Value Help Dialog -->
+<Dialog
+    id="idSFCValueHelpDialog"
+    title="{i18n>dialog.sfcValueHelp.title}"
+    contentWidth="40%"
+    contentHeight="65%">
+
+    <VBox class="sapUiSmallMargin">
+        <SearchField
+            id="idSFCSearchField"
+            liveChange=".onSFCSearchValueHelp"
+            width="100%" />
+    </VBox>
+
+    <Table
+        id="idSFCValueHelpTable"
+        mode="SingleSelectMaster"
+        includeItemInSelection="true"
+        selectionChange=".onSFCValueHelpConfirm"
+        items="{sfcValueHelpModel>/sfcList}">
+
+        <columns>
+            <Column id="sfcColumnId">
+                <Text text="{i18n>label.sfc.text}" />
+            </Column>
+            <Column id="sfcStatusColumnId" visible="false">
+                <Text text="{i18n>label.status.text}" />
+            </Column>
+        </columns>
+
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{sfcValueHelpModel>sfc}" />
+                    <Text text="{sfcValueHelpModel>sfcStatus}" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+
+    <endButton>
+        <Button text="{i18n>button.cancel.text}" press=".onCancelSFCValueHelp" />
+    </endButton>
+</Dialog>
+
+<!-- Selection Operation Value Help Dialog -->
+<Dialog
+    id="idOperValueHelpDialog"
+    title="{i18n>dialog.operValueHelp.title}"
+    contentWidth="40%"
+    contentHeight="65%">
+
+    <VBox class="sapUiSmallMargin">
+        <SearchField
+            id="idOperSearchField"
+            liveChange=".onOperSearchValueHelp"
+            width="100%" />
+    </VBox>
+
+    <Table
+        id="idOperValueHelpTable"
+        mode="SingleSelectMaster"
+        includeItemInSelection="true"
+        selectionChange=".onOperValueHelpConfirm"
+        items="{operValueHelpModel>/operList}">
+
+        <columns>
+            <Column id="operColumnId">
+                <Text text="{i18n>label.oper.text}" />
+            </Column>
+            <Column id="operVersionColumnId">
+                <Text text="{i18n>label.version.text}" />
+            </Column>
+            <Column id="operDescColumnId">
+                <Text text="{i18n>label.desc.text}" />
+            </Column>
+            <Column id="operWCColumnId" visible="false">
+                <Text text="{i18n>label.workCenter.text}" />
+            </Column>
+        </columns>
+
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{operValueHelpModel>operation}" />
+                    <Text text="{operValueHelpModel>operVersion}" />
+                    <Text text="{operValueHelpModel>operDesc}" />
+                    <Text text="{operValueHelpModel>workCenter}" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+
+    <endButton>
+        <Button text="{i18n>button.cancel.text}" press=".onCancelOperValueHelp" />
+    </endButton>
+</Dialog>
+
+<!-- Selection Resource Value Help Dialog -->
+<Dialog
+    id="idRescValueHelpDialog"
+    title="{i18n>dialog.rescValueHelp.title}"
+    contentWidth="40%"
+    contentHeight="65%">
+
+    <VBox class="sapUiSmallMargin">
+        <SearchField
+            id="idRescSearchField"
+            liveChange=".onRescSearchValueHelp"
+            width="100%" />
+    </VBox>
+
+    <Table
+        id="idRescValueHelpTable"
+        mode="SingleSelectMaster"
+        includeItemInSelection="true"
+        selectionChange=".onRescValueHelpConfirm"
+        items="{rescValueHelpModel>/rescList}">
+
+        <columns>
+            <Column id="rescColumnId">
+                <Text text="{i18n>label.resc.text}" />
+            </Column>
+            <Column id="rescStatusColumnId">
+                <Text text="{i18n>label.status.text}" />
+            </Column>
+        </columns>
+
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{rescValueHelpModel>resource}" />
+                    <Text text="{rescValueHelpModel>rescStatus}" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+
+    <endButton>
+        <Button text="{i18n>button.cancel.text}" press=".onCancelRescValueHelp" />
+    </endButton>
+</Dialog>
+
+</mvc:View>

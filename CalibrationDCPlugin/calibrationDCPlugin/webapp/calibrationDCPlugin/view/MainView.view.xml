@@ -1,0 +1,253 @@
+<mvc:View 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:f="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core" 
+    xmlns:ui="sap.ui.table" 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    controllerName="abb.views.calibrationDC.calibrationDCPlugin.calibrationDCPlugin.controller.MainView"
+    width="100%" 
+    height="100%">
+		
+    <Panel 
+    id="panelPlugin"  
+    width="100%" 
+    height="100%" 
+    expandable="false" 
+    expanded="false" 
+    accessibleRole="Region" 
+    backgroundDesign="Transparent" 
+    class="sapUiNoContentPadding">
+    <headerToolbar>
+        <Toolbar height="3rem">
+            <Button
+                id="backButton"
+                visible="false"
+                text="{i18n>template.back.btn}"
+                tooltip="{i18n>template.back.tooltip}"
+                icon="sap-icon://nav-back"
+                press="onBackPress"/>
+            <Title id="headerTitle" text=""/>
+            <ToolbarSpacer/>
+            <Button
+                id="closeButton"
+                visible="false"
+                tooltip="{i18n>template.close.tooltip}"
+                icon="sap-icon://decline"
+                press="onClosePress"/>
+        </Toolbar>
+    </headerToolbar>
+    <content>
+    <VBox id="contentBoxId" visible="true">
+        <f:SimpleForm
+            id="calibrationForm"
+            editable="true"
+            layout="ResponsiveGridLayout"
+            labelSpanXL="3"
+            labelSpanL="3"
+            labelSpanM="3"
+            labelSpanS="12"
+            adjustLabelSpan="false"
+            columnsXL="2"
+            columnsL="2"
+            columnsM="2"
+            class="sapUiSmallMargin sapUiNoContentPadding">
+
+            <!-- Row 1 -->
+            <Label text="{i18n>label.driftValue.text}" required="true" />
+            <Input
+                id="driftValueInputId"
+                placeholder="{i18n>input.driftValue.placeHolder}"
+                value="{dcDataModel>/DRIFT_VALUE}"
+                liveChange="onLiveChangeNumber"
+                >
+                <layoutData>
+                    <l:GridData span="L6 M6 S12"/>
+                </layoutData>
+            </Input>
+
+            <Label text="{i18n>label.reck.text}" required="true" />
+            <Input
+                id="reckInputId"
+                placeholder="{i18n>input.reck.placeHolder}"
+                value="{dcDataModel>/RECK}"
+                liveChange="onLiveChangeInt">
+                <layoutData>
+                    <l:GridData span="L6 M6 S12"/>
+                </layoutData>
+            </Input>
+
+            <!-- Row 2 -->
+            <Label text="{i18n>label.spot.text}" required="true" />
+            <Input
+                id="spotInputId"
+                placeholder="{i18n>input.spot.placeHolder}"
+                value="{dcDataModel>/SPOT}"
+                liveChange="onLiveChangeInt">
+                <layoutData>
+                    <l:GridData span="L6 M6 S12"/>
+                </layoutData>
+            </Input>
+
+            <Label id="errorCodeLabelId" text="{i18n>label.errorCode.text}" required="false" />
+            <Input
+                id="errorCodeInputId"
+                placeholder="{i18n>input.errorCode.placeHolder}"
+                value="{dcDataModel>/ERROR_CODE}">
+                <layoutData>
+                    <l:GridData span="L6 M6 S12"/>
+                </layoutData>
+            </Input>
+
+            <!-- Row 3 -->
+            <Label  id="remarksLabelId" text="{i18n>label.remarks.text}" required="false" />
+            <TextArea
+                id="remarkInputId"
+                placeholder="{i18n>input.remarks.placeHolder}"
+                value="{dcDataModel>/REMARK}"
+                rows="2"
+                width="100%"
+                growing="true"
+                growingMaxLines="4"
+                showExceededText="true">
+                <layoutData>
+                    <l:GridData span="L6 M6 S12"/>
+                </layoutData>
+            </TextArea>
+
+            <Label text="{i18n>label.status.text}" required="true" />
+            <Switch
+                id="statusSwitchId"
+                state="{dcDataModel>/STATUS}"
+                customTextOn="PASS"
+                customTextOff="FAIL"
+                change="onStatusChange">
+                <layoutData>
+                    <l:GridData span="L6 M6 S12" />
+                </layoutData>
+            </Switch>
+        </f:SimpleForm>
+        
+        <!-- <Text text="     "></Text>
+            <VBox class="sapUiSmallMarginTop sapUiSmallMarginBottom">
+                    <HBox justifyContent="SpaceAround" alignItems="Center" class="sapUiTinyMarginBottom">
+                        <Label text="{i18n>label.status.text}" required="true" design="Bold" labelFor="statusSwitchId" />
+                        <Switch id="statusSwitchId" state="{dcDataModel>/STATUS}" customTextOn="PASS" customTextOff="FAIL"></Switch>
+                        <Label text="{i18n>label.driftValue.text}" required="true" design="Bold" labelFor="driftValueInputId" />
+                        <Input 
+                            id="driftValueInputId"
+                            placeholder="{i18n>input.driftValue.placeHolder}"
+                            value="{dcDataModel>/DRIFT_VALUE}"
+                        />
+                    </HBox>
+                    <HBox justifyContent="SpaceAround" alignItems="Center" class="sapUiTinyMarginBottom">
+                        <Label text="{i18n>label.reck.text}" required="true" design="Bold" labelFor="reckInputId" />
+                        <Input 
+                            id="reckInputId"
+                            placeholder="{i18n>input.reck.placeHolder}"
+                            value="{dcDataModel>/RECK}"
+                        />
+                        <Label text="{i18n>label.spot.text}" required="true" design="Bold" labelFor="spotInputId" />
+                        <Input 
+                            id="spotInputId"
+                            placeholder="{i18n>input.spot.placeHolder}"
+                            value="{dcDataModel>/SPOT}"
+                        />
+                    </HBox>
+                    <HBox justifyContent="SpaceAround" alignItems="Center" class="sapUiTinyMarginBottom">
+                        <Label text="{i18n>label.errorCode.text}" required="true" design="Bold" labelFor="errorCodeInputId" />
+                        <Input 
+                            id="errorCodeInputId"
+                            placeholder="{i18n>input.errorCode.placeHolder}"
+                            value="{dcDataModel>/ERROR_CODE}"
+                        />
+                        <Label text="{i18n>label.remarks.text}" required="true" design="Bold" labelFor="remarksLabel" />
+                        <Input 
+                            id="remarksLabel"
+                            placeholder="{i18n>input.remarks.placeHolder}"
+                            value="{dcDataModel>/REMARK}"
+                        />
+                    </HBox>
+            </VBox> -->
+            <VBox>
+                <HBox justifyContent="Center" class="noBottomSpacing">
+                    <Button id="saveBtnId" text="{i18n>button.save.text}" icon="sap-icon://begin" press="onCollectPress" type="Emphasized" class="clickableButton"/>
+                    <Text text=" " width="15px" />
+                    <Button id="clearBtnId" text="{i18n>button.clear.text}" icon="sap-icon://sys-cancel" press="onClearPress" type="Default" class="clickableButton"/>
+                </HBox>
+            </VBox>
+            <VBox id="dcHistorianTableContainer1">
+                <Text text="   " />
+                <ui:Table
+                    id="dcHistorianTableId"
+                    selectionMode="None"
+                    visibleRowCount="{= ${dcHistorianModel>/dataList} ? ( ${dcHistorianModel>/dataList}.length > 5 ? 5 : ${dcHistorianModel>/dataList}.length ) : 0 }"
+                    rows="{dcHistorianModel>/dataList}">
+                    <ui:columns>
+                        <ui:Column width="100px">
+                            <Label text="{i18n>label.driftValue.text}" design="Bold"  />
+                            <ui:template>
+                                <Text text="{dcHistorianModel>DRIFT_VALUE}" wrapping="true"/>
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column width="50px">
+                            <Label text="{i18n>label.reck.text}" design="Bold"  />
+                            <ui:template>
+                                <Text text="{dcHistorianModel>RECK}" wrapping="true"/>
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column width="50px">
+                            <Label text="{i18n>label.spot.text}" design="Bold"  />
+                            <ui:template>
+                                <Text text="{dcHistorianModel>SPOT}" wrapping="true"/>
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column width="100px">
+                            <Label text="{i18n>label.errorCode.text}" design="Bold"  />
+                            <ui:template>
+                                <Text text="{dcHistorianModel>ERROR_CODE}" wrapping="true"/>
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column>
+                            <Label text="{i18n>label.remarks.text}" design="Bold"  />
+                            <ui:template>
+                                <Text text="{dcHistorianModel>REMARK}" wrapping="true"/>
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column width="100px">
+                            <Label text="{i18n>label.status.text}" design="Bold"  />
+                            <ui:template>
+                                <!-- <Text text="{dcHistorianModel>STATUS}" wrapping="true"/> -->
+                                <core:Icon
+                                    id="statusIcon"
+                                    src="{= ${dcHistorianModel>STATUS} === 'PASS-COLLECTED' ? 'sap-icon://status-completed' :
+                                            ${dcHistorianModel>STATUS} === 'FAIL-COLLECTED' ? 'sap-icon://decline' : 'sap-icon://appear-offline'}"
+                                    color="{= ${dcHistorianModel>STATUS} === 'PASS-COLLECTED' ? '#28a745' : 
+                                                ${dcHistorianModel>STATUS} === 'FAIL-COLLECTED' ? '#df6e0c' : '#b00'}"
+                                    size="1.5rem"
+                                    tooltip="{dcHistorianModel>STATUS}"
+                                />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column>
+                            <Label text="{i18n>label.userId.text}" design="Bold"  />
+                            <ui:template>
+                                <Text text="{dcHistorianModel>UserId}" wrapping="true"/>
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column width="170px">
+                            <Label text="{i18n>label.lastUpdatedAt.text}" design="Bold"  />
+                            <ui:template>
+                                <Text text="{dcHistorianModel>LastUpdatedAt}" wrapping="true"/>
+                            </ui:template>
+                        </ui:Column>
+                    </ui:columns>
+                </ui:Table>
+                <Text text="      "  />
+            </VBox> 
+        </VBox>
+    </content>
+</Panel>
+
+</mvc:View>

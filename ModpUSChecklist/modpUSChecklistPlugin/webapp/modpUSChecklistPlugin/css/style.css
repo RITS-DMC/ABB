@@ -1,0 +1,63 @@
+.sapMPanelBGTransparent {
+    /* background-color: transparent;*/
+    background-color: #d9d9d9; 
+    
+}
+.sapMInputBaseInner {
+   
+    font-size: 15px;
+}
+
+.sapMInputBaseContentWrapper{
+    height:25px !important;  
+    }
+
+
+.sapMTitle {
+  
+    color: whitesmoke;
+
+}
+
+.sapMPanel .sapMPanelHdr, .sapMPanel .sapMTB.sapMPanelHeaderTB {
+   
+    background-color: #354a5f;
+}
+
+.sapMBtn .sapMBtnNegative, .sapContrast span.sapMBtnInner.sapMBtnNegative {
+    background: #b00;
+    border-color: #b00;
+}
+
+.sapMBtn .sapMBtnSuccess, .sapContrast span.sapMBtnInner.sapMBtnSuccess {
+    background: #107e3e;
+    border-color: #107e3e;
+} 
+
+span.sapMBtnInner.sapMBtnAttention {
+    background-color: #df6e0c;
+    border-color: #df6e0c;
+    color: #ffffff;
+} 
+.dim-icon .sapMBtnIcon {
+    color: grey !important;
+    opacity: 0.5;
+}
+
+.highlight-icon-green .sapMBtnInner .sapMBtnIcon {
+    color: #107e3e !important; 
+}
+
+.highlight-icon-yellow .sapMBtnInner .sapMBtnIcon {
+    color: #FFD700 !important; 
+}
+
+.highlight-icon-red .sapMBtnInner .sapMBtnIcon {
+    color: #bb0000 !important; 
+}
+
+.wrapHBox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem; /* optional spacing */
+}

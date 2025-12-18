@@ -1,0 +1,100 @@
+<mvc:View 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:f="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core" 
+    xmlns:ui="sap.ui.table" 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    controllerName="abb.views.reprintTracableId.reprintTracableIdPlugin.reprintTracableIdPlugin.controller.MainView" 
+    width="100%" height="100%">
+		
+    <Panel 
+            id="panelPlugin"  
+            width="100%"
+            height="100%"
+            expandable="false"
+            expanded="false"
+            accessibleRole="Region"
+            backgroundDesign="Transparent"
+            class="sapUiNoContentPadding">  
+    <headerToolbar>
+        <Toolbar height="3rem">
+            <Button
+                id="backButton"
+                visible="false"
+                text="{i18n>template.back.btn}"
+                tooltip="{i18n>template.back.tooltip}"
+                icon="sap-icon://nav-back"
+                press="onBackPress"/>
+            <Title id="headerTitle" text=""/>
+            <ToolbarSpacer/>
+            <Button
+                id="closeButton"
+                visible="false"
+                tooltip="{i18n>template.close.tooltip}"
+                icon="sap-icon://decline"
+                press="onClosePress"/>
+        </Toolbar>
+    </headerToolbar>
+    <content>
+        <VBox>
+            <f:SimpleForm
+            id="reprintForm"
+            editable="true"
+            layout="ResponsiveGridLayout"
+            labelSpanXL="3"
+            labelSpanL="3"
+            labelSpanM="3"
+            labelSpanS="12"
+            adjustLabelSpan="false"
+            columnsXL="2"
+            columnsL="2"
+            columnsM="2"
+            class="sapUiSmallMargin sapUiNoContentPadding">
+                <Label text="{i18n>label.sfc.text}" labelFor="sfcInputId"/>
+                <Input
+                id="sfcInputId"
+                placeholder="{i18n>input.scanSfc.placeHolder}"
+                submit="oBindReprintTable">
+                    <layoutData>
+                        <l:GridData span="L6 M6 S12"/>
+                    </layoutData>
+                </Input>
+            </f:SimpleForm>
+        </VBox>
+        <VBox>
+            <Text text="   " />
+            <ui:Table
+                id="reprintTraceTableId"
+                selectionMode="None"
+                visibleRowCount="{= ${reprintTraceModel>/dataList} ? ( ${reprintTraceModel>/dataList}.length > 5 ? 5 : ${reprintTraceModel>/dataList}.length ) : 0 }"
+                rows="{reprintTraceModel>/dataList}">
+                <ui:columns>
+                    <ui:Column hAlign="Center">
+                        <Label text="{i18n>label.component.text}" design="Bold" textAlign="Center"/>
+                        <ui:template>
+                            <Text text="{reprintTraceModel>component}" wrapping="true" textAlign="Center"/>
+                        </ui:template>
+                    </ui:Column>
+
+                    <ui:Column hAlign="Center">
+                        <Label text="{i18n>label.traceableId.text}" design="Bold" textAlign="Center"/>
+                        <ui:template>
+                            <Text text="{reprintTraceModel>traceableId}" wrapping="true" textAlign="Center"/>
+                        </ui:template>
+                    </ui:Column>
+
+                    <ui:Column hAlign="Center" width="200px">
+                        <Label text="{i18n>label.action.text}" design="Bold" textAlign="Center"/>
+                        <ui:template>
+                            <Button text="{i18n>button.reprint.text}" press=".onReprintPress" icon="sap-icon://print"/>
+                        </ui:template>
+                    </ui:Column>
+                </ui:columns>
+            </ui:Table>
+            <Text text="   " />
+        </VBox>
+    </content>
+    </Panel>
+</mvc:View>

@@ -1,0 +1,18 @@
+{
+	"components": [
+		{
+			"id": "customSignOffPlugin",
+			"type": "VIEW_PLUGIN",
+			"allowMultipleInstances": true,
+			"name": "abb.views.custom.customSignOffPlugin.customSignOffPlugin",
+			"propertyEditor": "abb.views.custom.customSignOffPlugin.customSignOffPlugin.builder.PropertyEditor",
+			"i18n": "abb.views.custom.customSignOffPlugin.customSignOffPlugin.i18n.i18n",
+			"i18nLocales": {
+				"de": "abb.views.custom.customSignOffPlugin.customSignOffPlugin.i18n.i18n_de"
+			},
+            "productionProcessEnabled": true,
+           "productionProcessTitle": "customSignOffPlugin",
+			"supportedPodTypes": ["WORK_CENTER","OPERATION","ORDER"]
+		}   
+	]
+}

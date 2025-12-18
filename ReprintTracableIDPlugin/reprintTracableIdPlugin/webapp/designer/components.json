@@ -1,0 +1,18 @@
+{
+	"components": [
+		{
+			"id": "reprintTracableIdPlugin",
+			"type": "VIEW_PLUGIN",
+			"allowMultipleInstances": false,
+			"name": "abb.views.reprintTracableId.reprintTracableIdPlugin.reprintTracableIdPlugin",
+			"propertyEditor": "abb.views.reprintTracableId.reprintTracableIdPlugin.reprintTracableIdPlugin.builder.PropertyEditor",
+			"i18n": "abb.views.reprintTracableId.reprintTracableIdPlugin.reprintTracableIdPlugin.i18n.i18n",
+			"i18nLocales": {
+				"de": "abb.views.reprintTracableId.reprintTracableIdPlugin.reprintTracableIdPlugin.i18n.i18n_de"
+			},
+            "productionProcessEnabled": true,
+           "productionProcessTitle": "reprintTracableIdPlugin",
+			"supportedPodTypes": ["WORK_CENTER","OPERATION","ORDER","OTHER","MONITOR"]
+		}   
+	]
+}

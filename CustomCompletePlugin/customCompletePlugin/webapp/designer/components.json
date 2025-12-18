@@ -1,0 +1,18 @@
+{
+	"components": [
+		{
+			"id": "customCompletePlugin",
+			"type": "VIEW_PLUGIN",
+			"allowMultipleInstances": false,
+			"name": "abb.views.customComplete.customCompletePlugin.customCompletePlugin",
+			"propertyEditor": "abb.views.customComplete.customCompletePlugin.customCompletePlugin.builder.PropertyEditor",
+			"i18n": "abb.views.customComplete.customCompletePlugin.customCompletePlugin.i18n.i18n",
+			"i18nLocales": {
+				"de": "abb.views.customComplete.customCompletePlugin.customCompletePlugin.i18n.i18n_de"
+			},
+            "productionProcessEnabled": true,
+           "productionProcessTitle": "customCompletePlugin",
+			"supportedPodTypes": ["WORK_CENTER","OPERATION","ORDER"]
+		}   
+	]
+}

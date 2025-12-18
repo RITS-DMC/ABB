@@ -1,0 +1,18 @@
+{
+	"components": [
+		{
+			"id": "reLogCompleteRCPlugin",
+			"type": "VIEW_PLUGIN",
+			"allowMultipleInstances": false,
+			"name": "abb.views.reLogCompleteRC.reLogCompleteRCPlugin.reLogCompleteRCPlugin",
+			"propertyEditor": "abb.views.reLogCompleteRC.reLogCompleteRCPlugin.reLogCompleteRCPlugin.builder.PropertyEditor",
+			"i18n": "abb.views.reLogCompleteRC.reLogCompleteRCPlugin.reLogCompleteRCPlugin.i18n.i18n",
+			"i18nLocales": {
+				"de": "abb.views.reLogCompleteRC.reLogCompleteRCPlugin.reLogCompleteRCPlugin.i18n.i18n_de"
+			},
+            "productionProcessEnabled": true,
+           "productionProcessTitle": "reLogCompleteRCPlugin",
+			"supportedPodTypes": ["WORK_CENTER","OPERATION","ORDER","OTHER","MONITOR"]
+		}   
+	]
+}
